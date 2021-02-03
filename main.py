@@ -16,7 +16,7 @@ class Main:
 		btn_frame.pack(expand=True, fill=BOTH)
 
 		var = StringVar()
-		label = Label(btn_frame, text="Flashcard Reviewer", relief=FLAT)
+		label = Label(btn_frame, text="Flashcard Reviewer", relief=FLAT)		
 		label.config(font=("Courier", 20))
 		label.pack(fill=BOTH)
 

@@ -43,7 +43,7 @@ class Pages:
     btns = []
     i = 0;
     for dt in self.alldata[self.index]:
-      btns.append(Button(self.folder_frame, text="Flashcard {}".format(i+1), command= lambda dt = dt: self.view_cards(dt), padx=20))
+      btns.append(Button(self.folder_frame, text="Flashcard {}".format(i+1), command= lambda i = i: self.view_cards(i), padx=20))
       btns[i].grid(row=row, column=col, pady=(0, 5), padx=(0, 5))
       btns[i].config(width=9, font=17)
       i += 1
@@ -69,8 +69,10 @@ class Pages:
 
     return self
   
-  def view_cards(self, dta):
-    print(dta)
+  def view_cards(self, index):
+    from classes.viewcard import ViewCard
+    self.main_window.destroy()
+    viewcard = ViewCard(index, self.index, self.alldata)
     return self
 	
   def remove_child_frame_elem(self):
