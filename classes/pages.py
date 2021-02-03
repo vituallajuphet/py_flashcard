@@ -1,13 +1,14 @@
 from tkinter import *
-
+from classes.my_data import MyData
 
 class Pages:
 
-  def __init__(self, mydata, alldata):
+  def __init__(self, index, alldata):
     
-    self.dta = mydata
+    self.index = index
     self.alldata = alldata
-    self.main_window = Tk(className="Folder {}".format(self.dta[len(self.dta)-1]))
+    self.num = index + 1
+    self.main_window = Tk(className="Folder {}".format(self.num))
     self.main_window.geometry("600x850")
     self.build()
 
@@ -17,7 +18,7 @@ class Pages:
     btn_frame.pack(expand=True, fill=BOTH)
 
     var = StringVar()
-    label = Label(btn_frame, text="Folder {}".format(self.dta[len(self.dta)-1]), relief=FLAT)
+    label = Label(btn_frame, text="Folder {}".format(self.num), relief=FLAT)
     label.config(font=("Courier", 20))
     label.pack(fill=BOTH)
 
@@ -41,10 +42,8 @@ class Pages:
     row = 1
     btns = []
     i = 0;
-    for dta in self.dta:
-      if i == len(self.dta):
-        break
-      btns.append(Button(self.folder_frame, text="Folder {}".format(i+1), command= lambda dta = dta: self.view_cards(dta), padx=20))
+    for dt in self.alldata[self.index]:
+      btns.append(Button(self.folder_frame, text="Flashcard {}".format(i+1), command= lambda dt = dt: self.view_cards(dt), padx=20))
       btns[i].grid(row=row, column=col, pady=(0, 5), padx=(0, 5))
       btns[i].config(width=9, font=17)
       i += 1
@@ -59,8 +58,12 @@ class Pages:
 
   def create_folder (self):
     self.remove_child_frame_elem()
-    dta.set_data(self.data.append([]))
-    self.data = data.get_data()
+    print( self.alldata, "thi1")
+    print( self.alldata[self.index], "this")
+    self.alldata[self.index].append("")
+    dta = MyData()
+    dta.set_data(self.alldata)
+    self.alldata = dta.get_data()
 
     self.build_folder()
 
@@ -73,7 +76,7 @@ class Pages:
   def remove_child_frame_elem(self):
     i = 0
     for child in self.folder_frame.winfo_children():
-      if i == 0:
+      if i == 0 or i == 1:
         i += 1 
         continue
       child.destroy()

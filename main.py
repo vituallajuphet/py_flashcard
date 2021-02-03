@@ -39,8 +39,7 @@ class Main:
 		btns = []
 		i = 0;
 		for dta in self.data:
-			dta.append(i)
-			btns.append(Button(self.folder_frame, text="Folder {}".format(i+1), command= lambda dta = dta: self.view_cards(dta), padx=20))
+			btns.append(Button(self.folder_frame, text="Folder {}".format(i+1), command= lambda i = i: self.view_cards(i), padx=20))
 			btns[i].grid(row=row, column=col, pady=(0, 5), padx=(0, 5))
 			btns[i].config(width=10, font=17)
 			i += 1
@@ -56,18 +55,18 @@ class Main:
 	def create_folder (self):
 		self.remove_child_frame_elem()
 		dta = MyData()
-		dta.set_data(self.data.append([]))
-		self.data = data.get_data()
-
+		self.data.append([])
+		dta.set_data(self.data)
+		self.data = dta.get_data()
 		self.build_folder()
 
 		return self
 
 
-	def view_cards(self,dta):
+	def view_cards(self,index):
 		from classes.pages import	Pages
 		self.main_window.destroy()
-		page = Pages(dta, self.data)
+		page = Pages(index, self.data)
 
 	
 	def remove_child_frame_elem(self):
