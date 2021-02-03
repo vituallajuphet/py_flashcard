@@ -3,13 +3,13 @@ class MyData:
 	def __init__(self):
 		self.data = [
 			[
-				"content1",
-				"content2",
-				"content3",
+				{"title":"zilong", "content":"Who is the greatest hero?"},
+				{"title":"test2", "content":"the conetent1"},
+				{"title":"test3", "content":"the conetent2"},
 			],
 			[
-				"content1",
-				"content2",
+				{"title":"test", "content":"the conetent3"},
+
 			]
 		]
 	

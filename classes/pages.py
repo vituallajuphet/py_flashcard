@@ -58,9 +58,8 @@ class Pages:
 
   def create_folder (self):
     self.remove_child_frame_elem()
-    print( self.alldata, "thi1")
-    print( self.alldata[self.index], "this")
-    self.alldata[self.index].append("")
+    obj = {"title":"", "content":""}
+    self.alldata[self.index].append(obj)
     dta = MyData()
     dta.set_data(self.alldata)
     self.alldata = dta.get_data()
