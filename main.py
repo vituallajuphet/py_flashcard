@@ -66,8 +66,8 @@ class Main:
 
 	def view_cards(self,dta):
 		from classes.pages import	Pages
-		# self.main_window.withdraw()
-		page = Pages(dta)
+		self.main_window.destroy()
+		page = Pages(dta, self.data)
 
 	
 	def remove_child_frame_elem(self):

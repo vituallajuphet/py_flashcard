@@ -3,20 +3,21 @@ from tkinter import *
 
 class Pages:
 
-  def __init__(self, mydata):
+  def __init__(self, mydata, alldata):
     
-    self.alldata = mydata
-    self.main_window = Tk(className="Folder {}".format(self.alldata[len(self.alldata)-1]))
-    self.main_window.geometry("600x800")
+    self.dta = mydata
+    self.alldata = alldata
+    self.main_window = Tk(className="Folder {}".format(self.dta[len(self.dta)-1]))
+    self.main_window.geometry("600x850")
     self.build()
 
   def build(self):
-
+    print("running...")
     btn_frame = Frame(self.main_window, pady=16)
     btn_frame.pack(expand=True, fill=BOTH)
 
     var = StringVar()
-    label = Label(btn_frame, text=self.foldername, relief=FLAT)
+    label = Label(btn_frame, text="Folder {}".format(self.dta[len(self.dta)-1]), relief=FLAT)
     label.config(font=("Courier", 20))
     label.pack(fill=BOTH)
 
@@ -26,12 +27,12 @@ class Pages:
     # label.pack(side=LEFT)
 
     btn_add = Button(self.folder_frame, text="+ Add Flashcard", command=self.create_folder, padx=20)
-    btn_add.place(x=460, y=-55)
+    btn_add.place(x=400, y=-55)
 
     btn_back = Button(self.folder_frame, text="Back", command=self.back_home, padx=20)
     btn_back.place(x=20, y=-55)
 
-
+    self.build_folder()
     self.main_window.mainloop()
   
   def build_folder(self):
@@ -40,10 +41,12 @@ class Pages:
     row = 1
     btns = []
     i = 0;
-    for dta in self.data:
+    for dta in self.dta:
+      if i == len(self.dta):
+        break
       btns.append(Button(self.folder_frame, text="Folder {}".format(i+1), command= lambda dta = dta: self.view_cards(dta), padx=20))
       btns[i].grid(row=row, column=col, pady=(0, 5), padx=(0, 5))
-      btns[i].config(width=10, font=17)
+      btns[i].config(width=9, font=17)
       i += 1
       col += 1
       if col == 5:
@@ -75,6 +78,12 @@ class Pages:
         continue
       child.destroy()
       i += 1
+  def back_home(self):
+    from main import Main
+    self.main_window.destroy()
+    main = Main(self.alldata)
+    
+    return self
 
 
 
